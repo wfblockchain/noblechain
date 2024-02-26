@@ -7,6 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"cosmossdk.io/simapp"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/grpc/tmservice"
@@ -15,7 +16,6 @@ import (
 	"github.com/cosmos/cosmos-sdk/server/api"
 	"github.com/cosmos/cosmos-sdk/server/config"
 	servertypes "github.com/cosmos/cosmos-sdk/server/types"
-	"github.com/cosmos/cosmos-sdk/simapp"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
@@ -87,9 +87,6 @@ import (
 	tmos "github.com/tendermint/tendermint/libs/os"
 	dbm "github.com/tendermint/tm-db"
 
-	fiattokenfactorymodule "github.com/circlefin/noble-fiattokenfactory/x/fiattokenfactory"
-	fiattokenfactorymodulekeeper "github.com/circlefin/noble-fiattokenfactory/x/fiattokenfactory/keeper"
-	fiattokenfactorymoduletypes "github.com/circlefin/noble-fiattokenfactory/x/fiattokenfactory/types"
 	"github.com/cosmos/cosmos-sdk/x/staking"
 	stakingkeeper "github.com/cosmos/cosmos-sdk/x/staking/keeper"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
@@ -103,6 +100,9 @@ import (
 	tokenfactorymodule "github.com/noble-assets/noble/v5/x/tokenfactory"
 	tokenfactorymodulekeeper "github.com/noble-assets/noble/v5/x/tokenfactory/keeper"
 	tokenfactorymoduletypes "github.com/noble-assets/noble/v5/x/tokenfactory/types"
+	fiattokenfactorymodule "github.com/wfblockchain/noble-fiattokenfactory/x/fiattokenfactory"
+	fiattokenfactorymodulekeeper "github.com/wfblockchain/noble-fiattokenfactory/x/fiattokenfactory/keeper"
+	fiattokenfactorymoduletypes "github.com/wfblockchain/noble-fiattokenfactory/x/fiattokenfactory/types"
 
 	cctp "github.com/circlefin/noble-cctp/x/cctp"
 	cctpkeeper "github.com/circlefin/noble-cctp/x/cctp/keeper"

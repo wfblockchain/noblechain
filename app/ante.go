@@ -1,11 +1,11 @@
 package app
 
 import (
-	fiattokenfactory "github.com/circlefin/noble-fiattokenfactory/x/fiattokenfactory/keeper"
-	fiattokenfactorytypes "github.com/circlefin/noble-fiattokenfactory/x/fiattokenfactory/types"
 	"github.com/cosmos/cosmos-sdk/types/bech32"
 	tokenfactory "github.com/noble-assets/noble/v5/x/tokenfactory/keeper"
 	tokenfactorytypes "github.com/noble-assets/noble/v5/x/tokenfactory/types"
+	fiattokenfactory "github.com/wfblockchain/noble-fiattokenfactory/x/fiattokenfactory/keeper"
+	fiattokenfactorytypes "github.com/wfblockchain/noble-fiattokenfactory/x/fiattokenfactory/types"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"

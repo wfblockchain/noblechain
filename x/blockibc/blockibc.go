@@ -1,8 +1,6 @@
 package blockibc
 
 import (
-	fiatKeeper "github.com/circlefin/noble-fiattokenfactory/x/fiattokenfactory/keeper"
-	fiat_types "github.com/circlefin/noble-fiattokenfactory/x/fiattokenfactory/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/bech32"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
@@ -13,6 +11,8 @@ import (
 	ibcexported "github.com/cosmos/ibc-go/v4/modules/core/exported"
 	"github.com/noble-assets/noble/v5/x/tokenfactory/keeper"
 	"github.com/noble-assets/noble/v5/x/tokenfactory/types"
+	fiatKeeper "github.com/wfblockchain/noble-fiattokenfactory/x/fiattokenfactory/keeper"
+	fiat_types "github.com/wfblockchain/noble-fiattokenfactory/x/fiattokenfactory/types"
 )
 
 var _ porttypes.IBCModule = &IBCMiddleware{}

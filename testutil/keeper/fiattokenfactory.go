@@ -3,8 +3,6 @@ package keeper
 import (
 	"testing"
 
-	"github.com/circlefin/noble-fiattokenfactory/x/fiattokenfactory/keeper"
-	"github.com/circlefin/noble-fiattokenfactory/x/fiattokenfactory/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
 	"github.com/cosmos/cosmos-sdk/store"
@@ -15,6 +13,8 @@ import (
 	"github.com/tendermint/tendermint/libs/log"
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 	tmdb "github.com/tendermint/tm-db"
+	"github.com/wfblockchain/noble-fiattokenfactory/x/fiattokenfactory/keeper"
+	"github.com/wfblockchain/noble-fiattokenfactory/x/fiattokenfactory/types"
 )
 
 func FiatTokenfactoryKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
