@@ -5,11 +5,11 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	keepertest "github.com/noble-assets/noble/v5/testutil/keeper"
-	"github.com/noble-assets/noble/v5/testutil/nullify"
-	"github.com/noble-assets/noble/v5/x/tokenfactory/keeper"
-	"github.com/noble-assets/noble/v5/x/tokenfactory/types"
 	"github.com/stretchr/testify/require"
+	keepertest "github.com/wfblockchain/noblechain/v5/testutil/keeper"
+	"github.com/wfblockchain/noblechain/v5/testutil/nullify"
+	"github.com/wfblockchain/noblechain/v5/x/tokenfactory/keeper"
+	"github.com/wfblockchain/noblechain/v5/x/tokenfactory/types"
 )
 
 // Prevent strconv unused error

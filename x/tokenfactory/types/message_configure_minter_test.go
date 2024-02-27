@@ -5,8 +5,8 @@ import (
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"github.com/noble-assets/noble/v5/testutil/sample"
 	"github.com/stretchr/testify/require"
+	"github.com/wfblockchain/noblechain/v5/testutil/sample"
 )
 
 func TestMsgConfigureMinter_ValidateBasic(t *testing.T) {

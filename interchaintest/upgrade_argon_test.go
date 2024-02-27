@@ -12,7 +12,6 @@ import (
 	"time"
 
 	cosmossdk_io_math "cosmossdk.io/math"
-	cctptypes "github.com/circlefin/noble-cctp/x/cctp/types"
 	sdkclient "github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -25,6 +24,7 @@ import (
 	"github.com/strangelove-ventures/interchaintest/v4/ibc"
 	"github.com/strangelove-ventures/interchaintest/v4/testutil"
 	"github.com/stretchr/testify/require"
+	cctptypes "github.com/wfblockchain/noble-cctp/x/cctp/types"
 )
 
 func testPostArgonUpgrade(

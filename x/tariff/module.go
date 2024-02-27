@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
+	abci "github.com/cometbft/cometbft/abci/types"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
@@ -12,11 +13,10 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	"github.com/gorilla/mux"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
-	"github.com/noble-assets/noble/v5/x/tariff/client/cli"
-	"github.com/noble-assets/noble/v5/x/tariff/keeper"
-	"github.com/noble-assets/noble/v5/x/tariff/types"
 	"github.com/spf13/cobra"
-	abci "github.com/tendermint/tendermint/abci/types"
+	"github.com/wfblockchain/noblechain/v5/x/tariff/client/cli"
+	"github.com/wfblockchain/noblechain/v5/x/tariff/keeper"
+	"github.com/wfblockchain/noblechain/v5/x/tariff/types"
 )
 
 var (

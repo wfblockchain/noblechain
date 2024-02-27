@@ -4,13 +4,13 @@ import (
 	"context"
 	"testing"
 
-	"github.com/circlefin/noble-cctp/x/cctp/types"
 	"github.com/gogo/protobuf/jsonpb"
-	"github.com/noble-assets/noble/v5/cmd"
 	"github.com/strangelove-ventures/interchaintest/v4"
 	"github.com/strangelove-ventures/interchaintest/v4/chain/cosmos"
 	"github.com/strangelove-ventures/interchaintest/v4/testreporter"
 	"github.com/stretchr/testify/require"
+	"github.com/wfblockchain/noble-cctp/x/cctp/types"
+	"github.com/wfblockchain/noblechain/v5/cmd"
 	"go.uber.org/zap/zaptest"
 )
 

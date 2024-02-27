@@ -1,7 +1,7 @@
 package globalfee
 
 import (
-	"github.com/noble-assets/noble/v5/x/globalfee/types"
+	"github.com/wfblockchain/noblechain/v5/x/globalfee/types"
 )
 
 const (

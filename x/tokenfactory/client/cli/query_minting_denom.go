@@ -5,8 +5,8 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
-	"github.com/noble-assets/noble/v5/x/tokenfactory/types"
 	"github.com/spf13/cobra"
+	"github.com/wfblockchain/noblechain/v5/x/tokenfactory/types"
 )
 
 func CmdShowMintingDenom() *cobra.Command {

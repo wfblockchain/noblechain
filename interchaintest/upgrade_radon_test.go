@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	globalfeetypes "github.com/noble-assets/noble/v5/x/globalfee/types"
 	"github.com/strangelove-ventures/interchaintest/v4/chain/cosmos"
 	"github.com/strangelove-ventures/interchaintest/v4/ibc"
 	"github.com/stretchr/testify/require"
 	fiattokenfactorytypes "github.com/wfblockchain/noble-fiattokenfactory/x/fiattokenfactory/types"
+	globalfeetypes "github.com/wfblockchain/noblechain/v5/x/globalfee/types"
 )
 
 func testPostRadonUpgrade(

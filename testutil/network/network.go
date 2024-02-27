@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"cosmossdk.io/simapp"
+	tmrand "github.com/cometbft/cometbft/libs/rand"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/crypto/hd"
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
@@ -15,20 +16,19 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/cosmos/cosmos-sdk/x/staking"
-	tmrand "github.com/tendermint/tendermint/libs/rand"
 	tmdb "github.com/tendermint/tm-db"
 
-	cctptypes "github.com/circlefin/noble-cctp/x/cctp/types"
 	genutil "github.com/cosmos/cosmos-sdk/x/genutil"
 	genutiltypes "github.com/cosmos/cosmos-sdk/x/genutil/types"
 	paramstypes "github.com/cosmos/cosmos-sdk/x/params/types/proposal"
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	upgradetypes "github.com/cosmos/cosmos-sdk/x/upgrade/types"
-	"github.com/noble-assets/noble/v5/app"
-	"github.com/noble-assets/noble/v5/cmd"
-	"github.com/noble-assets/noble/v5/testutil/sample"
-	paramauthoritytypes "github.com/strangelove-ventures/paramauthority/x/params/types/proposal"
-	paramauthorityupgradetypes "github.com/strangelove-ventures/paramauthority/x/upgrade/types"
+	cctptypes "github.com/wfblockchain/noble-cctp/x/cctp/types"
+	paramauthoritytypes "github.com/wfblockchain/noble-paramauthority/x/params/types/proposal"
+	paramauthorityupgradetypes "github.com/wfblockchain/noble-paramauthority/x/upgrade/types"
+	"github.com/wfblockchain/noblechain/v5/app"
+	"github.com/wfblockchain/noblechain/v5/cmd"
+	"github.com/wfblockchain/noblechain/v5/testutil/sample"
 )
 
 type (

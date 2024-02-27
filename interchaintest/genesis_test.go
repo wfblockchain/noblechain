@@ -8,14 +8,14 @@ import (
 	simappparams "cosmossdk.io/simapp/params"
 	"github.com/cosmos/cosmos-sdk/types"
 	"github.com/icza/dyno"
-	tokenfactorytypes "github.com/noble-assets/noble/v5/x/tokenfactory/types"
 	"github.com/strangelove-ventures/interchaintest/v4"
 	"github.com/strangelove-ventures/interchaintest/v4/chain/cosmos"
 	"github.com/strangelove-ventures/interchaintest/v4/ibc"
 	"github.com/strangelove-ventures/interchaintest/v4/relayer"
 	"github.com/strangelove-ventures/interchaintest/v4/relayer/rly"
-	proposaltypes "github.com/strangelove-ventures/paramauthority/x/params/types/proposal"
-	upgradetypes "github.com/strangelove-ventures/paramauthority/x/upgrade/types"
+	proposaltypes "github.com/wfblockchain/noble-paramauthority/x/params/types/proposal"
+	upgradetypes "github.com/wfblockchain/noble-paramauthority/x/upgrade/types"
+	tokenfactorytypes "github.com/wfblockchain/noblechain/v5/x/tokenfactory/types"
 )
 
 var nobleImageInfo = []ibc.DockerImage{

@@ -5,12 +5,12 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/noble-assets/noble/v5/x/tokenfactory/types"
 	"github.com/strangelove-ventures/interchaintest/v4"
 	"github.com/strangelove-ventures/interchaintest/v4/chain/cosmos"
 	"github.com/strangelove-ventures/interchaintest/v4/ibc"
 	"github.com/strangelove-ventures/interchaintest/v4/testreporter"
 	"github.com/stretchr/testify/require"
+	"github.com/wfblockchain/noblechain/v5/x/tokenfactory/types"
 	"go.uber.org/zap/zaptest"
 )
 

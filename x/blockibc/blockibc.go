@@ -5,14 +5,14 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/bech32"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	capabilitytypes "github.com/cosmos/cosmos-sdk/x/capability/types"
-	transfertypes "github.com/cosmos/ibc-go/v4/modules/apps/transfer/types"
-	channeltypes "github.com/cosmos/ibc-go/v4/modules/core/04-channel/types"
-	porttypes "github.com/cosmos/ibc-go/v4/modules/core/05-port/types"
-	ibcexported "github.com/cosmos/ibc-go/v4/modules/core/exported"
-	"github.com/noble-assets/noble/v5/x/tokenfactory/keeper"
-	"github.com/noble-assets/noble/v5/x/tokenfactory/types"
+	transfertypes "github.com/cosmos/ibc-go/v7/modules/apps/transfer/types"
+	channeltypes "github.com/cosmos/ibc-go/v7/modules/core/04-channel/types"
+	porttypes "github.com/cosmos/ibc-go/v7/modules/core/05-port/types"
+	ibcexported "github.com/cosmos/ibc-go/v7/modules/core/exported"
 	fiatKeeper "github.com/wfblockchain/noble-fiattokenfactory/x/fiattokenfactory/keeper"
 	fiat_types "github.com/wfblockchain/noble-fiattokenfactory/x/fiattokenfactory/types"
+	"github.com/wfblockchain/noblechain/v5/x/tokenfactory/keeper"
+	"github.com/wfblockchain/noblechain/v5/x/tokenfactory/types"
 )
 
 var _ porttypes.IBCModule = &IBCMiddleware{}

@@ -9,16 +9,16 @@ import (
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"github.com/spf13/cobra"
 
-	abci "github.com/tendermint/tendermint/abci/types"
+	abci "github.com/cometbft/cometbft/abci/types"
 
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
 	cdctypes "github.com/cosmos/cosmos-sdk/codec/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
-	"github.com/noble-assets/noble/v5/x/tokenfactory/client/cli"
-	"github.com/noble-assets/noble/v5/x/tokenfactory/keeper"
-	"github.com/noble-assets/noble/v5/x/tokenfactory/types"
+	"github.com/wfblockchain/noblechain/v5/x/tokenfactory/client/cli"
+	"github.com/wfblockchain/noblechain/v5/x/tokenfactory/keeper"
+	"github.com/wfblockchain/noblechain/v5/x/tokenfactory/types"
 )
 
 var (
@@ -115,15 +115,15 @@ func NewAppModule(
 }
 
 // Deprecated: use RegisterServices
-func (am AppModule) Route() sdk.Route { return sdk.Route{} }
+// func (am AppModule) Route() sdk.Route { return sdk.Route{} }
 
 // Deprecated: use RegisterServices
-func (AppModule) QuerierRoute() string { return types.RouterKey }
+// func (AppModule) QuerierRoute() string { return types.RouterKey }
 
 // Deprecated: use RegisterServices
-func (am AppModule) LegacyQuerierHandler(_ *codec.LegacyAmino) sdk.Querier {
-	return nil
-}
+// func (am AppModule) LegacyQuerierHandler(_ *codec.LegacyAmino) sdk.Querier {
+// 	return nil
+// }
 
 // RegisterServices registers a gRPC query service to respond to the module-specific gRPC queries
 func (am AppModule) RegisterServices(cfg module.Configurator) {

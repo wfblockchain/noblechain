@@ -3,23 +3,23 @@ package tokenfactory
 import (
 	"math/rand"
 
-	simappparams "cosmossdk.io/simapp/params"
+	// simappparams "cosmossdk.io/simapp/params"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
-	"github.com/noble-assets/noble/v5/testutil/sample"
-	tokenfactorysimulation "github.com/noble-assets/noble/v5/x/tokenfactory/simulation"
-	"github.com/noble-assets/noble/v5/x/tokenfactory/types"
+	"github.com/wfblockchain/noblechain/v5/testutil/sample"
+	tokenfactorysimulation "github.com/wfblockchain/noblechain/v5/x/tokenfactory/simulation"
+	"github.com/wfblockchain/noblechain/v5/x/tokenfactory/types"
 )
 
 // avoid unused import issue
 var (
 	_ = sample.AccAddress
 	_ = tokenfactorysimulation.FindAccount
-	_ = simappparams.StakePerAccount
+	// _ = simappparams.StakePerAccount
 	_ = simulation.MsgEntryKind
 	_ = baseapp.Paramspace
 )
@@ -134,10 +134,11 @@ func (AppModule) ProposalContents(_ module.SimulationState) []simtypes.WeightedP
 }
 
 // RandomizedParams creates randomized  param changes for the simulator
-func (am AppModule) RandomizedParams(_ *rand.Rand) []simtypes.ParamChange {
+// deprecated
+// func (am AppModule) RandomizedParams(_ *rand.Rand) []simtypes.ParamChange {
 
-	return []simtypes.ParamChange{}
-}
+// 	return []simtypes.ParamChange{}
+// }
 
 // RegisterStoreDecoder registers a decoder
 func (am AppModule) RegisterStoreDecoder(_ sdk.StoreDecoderRegistry) {}

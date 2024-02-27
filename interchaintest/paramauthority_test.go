@@ -8,13 +8,13 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/x/params/types/proposal"
 	"github.com/icza/dyno"
-	"github.com/noble-assets/noble/v5/cmd"
 	"github.com/strangelove-ventures/interchaintest/v4"
 	"github.com/strangelove-ventures/interchaintest/v4/chain/cosmos"
 	"github.com/strangelove-ventures/interchaintest/v4/ibc"
 	"github.com/strangelove-ventures/interchaintest/v4/testreporter"
-	proposaltypes "github.com/strangelove-ventures/paramauthority/x/params/types/proposal"
 	"github.com/stretchr/testify/require"
+	proposaltypes "github.com/wfblockchain/noble-paramauthority/x/params/types/proposal"
+	"github.com/wfblockchain/noblechain/v5/cmd"
 	"go.uber.org/zap/zaptest"
 )
 

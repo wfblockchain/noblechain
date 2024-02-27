@@ -6,11 +6,11 @@ import (
 	"testing"
 	"time"
 
-	tarifftypes "github.com/noble-assets/noble/v5/x/tariff/types"
 	"github.com/strangelove-ventures/interchaintest/v4/chain/cosmos"
 	"github.com/strangelove-ventures/interchaintest/v4/ibc"
 	"github.com/strangelove-ventures/interchaintest/v4/testutil"
 	"github.com/stretchr/testify/require"
+	tarifftypes "github.com/wfblockchain/noblechain/v5/x/tariff/types"
 )
 
 type QueryValidatorsResponse struct {

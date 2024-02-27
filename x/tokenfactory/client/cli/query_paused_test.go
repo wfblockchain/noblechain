@@ -4,15 +4,15 @@ import (
 	"fmt"
 	"testing"
 
+	tmcli "github.com/cometbft/cometbft/libs/cli"
 	clitestutil "github.com/cosmos/cosmos-sdk/testutil/cli"
 	"github.com/stretchr/testify/require"
-	tmcli "github.com/tendermint/tendermint/libs/cli"
 	"google.golang.org/grpc/status"
 
-	"github.com/noble-assets/noble/v5/testutil/network"
-	"github.com/noble-assets/noble/v5/testutil/nullify"
-	"github.com/noble-assets/noble/v5/x/tokenfactory/client/cli"
-	"github.com/noble-assets/noble/v5/x/tokenfactory/types"
+	"github.com/wfblockchain/noblechain/v5/testutil/network"
+	"github.com/wfblockchain/noblechain/v5/testutil/nullify"
+	"github.com/wfblockchain/noblechain/v5/x/tokenfactory/client/cli"
+	"github.com/wfblockchain/noblechain/v5/x/tokenfactory/types"
 )
 
 func networkWithPausedObjects(t *testing.T) (*network.Network, types.Paused) {

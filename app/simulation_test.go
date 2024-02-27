@@ -4,10 +4,11 @@ import (
 	"os"
 	"testing"
 
-	"github.com/noble-assets/noble/v5/app"
-	"github.com/noble-assets/noble/v5/cmd"
+	"github.com/wfblockchain/noblechain/v5/app"
+	"github.com/wfblockchain/noblechain/v5/cmd"
 
 	"cosmossdk.io/simapp"
+	abci "github.com/cometbft/cometbft/abci/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -15,7 +16,6 @@ import (
 	simulationtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
 	"github.com/stretchr/testify/require"
-	abci "github.com/tendermint/tendermint/abci/types"
 )
 
 func init() {

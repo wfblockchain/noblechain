@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	"github.com/cosmos/cosmos-sdk/client"
-	"github.com/noble-assets/noble/v5/x/tokenfactory/types"
 	"github.com/spf13/cobra"
+	"github.com/wfblockchain/noblechain/v5/x/tokenfactory/types"
 )
 
 // GetQueryCmd returns the cli query commands for this module

@@ -4,8 +4,8 @@ import (
 	"testing"
 
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-	"github.com/noble-assets/noble/v5/testutil/sample"
 	"github.com/stretchr/testify/require"
+	"github.com/wfblockchain/noblechain/v5/testutil/sample"
 )
 
 func TestMsgUpdatePauser_ValidateBasic(t *testing.T) {
