@@ -1,13 +1,8 @@
 package app
 
 import (
-	"github.com/cosmos/cosmos-sdk/types/bech32"
-	fiattokenfactory "github.com/wfblockchain/noble-fiattokenfactory/x/fiattokenfactory/keeper"
-	fiattokenfactorytypes "github.com/wfblockchain/noble-fiattokenfactory/x/fiattokenfactory/types"
-	tokenfactory "github.com/wfblockchain/noblechain/v5/x/tokenfactory/keeper"
-	tokenfactorytypes "github.com/wfblockchain/noblechain/v5/x/tokenfactory/types"
-
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	"github.com/cosmos/cosmos-sdk/types/bech32"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"github.com/cosmos/cosmos-sdk/x/auth/ante"
 	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
@@ -15,8 +10,10 @@ import (
 	transfertypes "github.com/cosmos/ibc-go/v7/modules/apps/transfer/types"
 	ibcante "github.com/cosmos/ibc-go/v7/modules/core/ante"
 	ibckeeper "github.com/cosmos/ibc-go/v7/modules/core/keeper"
-
-	feeante "github.com/wfblockchain/noblechain/v5/x/globalfee/ante"
+	fiattokenfactory "github.com/wfblockchain/noble-fiattokenfactory/x/fiattokenfactory/keeper"
+	fiattokenfactorytypes "github.com/wfblockchain/noble-fiattokenfactory/x/fiattokenfactory/types"
+	tokenfactory "github.com/wfblockchain/noblechain/v5/x/tokenfactory/keeper"
+	tokenfactorytypes "github.com/wfblockchain/noblechain/v5/x/tokenfactory/types"
 )
 
 type HandlerOptions struct {
@@ -224,24 +221,21 @@ func NewAnteHandler(options HandlerOptions) (sdk.AnteHandler, error) {
 	}
 
 	anteDecorators := []sdk.AnteDecorator{
-		ante.NewSetUpContextDecorator(), // outermost AnteDecorator. SetUpContext must be called first
-		ante.NewRejectExtensionOptionsDecorator(),
-		NewIsBlacklistedDecorator(options.tokenFactoryKeeper, options.fiatTokenFactoryKeeper),
-		NewIsPausedDecorator(options.tokenFactoryKeeper, options.fiatTokenFactoryKeeper),
-		ante.NewMempoolFeeDecorator(),
+		ante.NewSetUpContextDecorator(),
+		ante.NewExtensionOptionsDecorator(options.ExtensionOptionChecker),
+		// ante.NewMempoolFeeDecorator(),
 		ante.NewValidateBasicDecorator(),
 		ante.NewTxTimeoutHeightDecorator(),
 		ante.NewValidateMemoDecorator(options.AccountKeeper),
 		ante.NewConsumeGasForTxSizeDecorator(options.AccountKeeper),
-		feeante.NewFeeDecorator(options.GlobalFeeSubspace, options.StakingSubspace, maxTotalBypassMinFeeMsgGasUsage),
-
-		ante.NewDeductFeeDecorator(options.AccountKeeper, options.BankKeeper, options.FeegrantKeeper),
-		ante.NewSetPubKeyDecorator(options.AccountKeeper), // SetPubKeyDecorator must be called before all signature verification decorators
+		ante.NewDeductFeeDecorator(options.AccountKeeper, options.BankKeeper, options.FeegrantKeeper, nil),
+		// SetPubKeyDecorator must be called before all signature verification decorators
+		ante.NewSetPubKeyDecorator(options.AccountKeeper),
 		ante.NewValidateSigCountDecorator(options.AccountKeeper),
 		ante.NewSigGasConsumeDecorator(options.AccountKeeper, sigGasConsumer),
 		ante.NewSigVerificationDecorator(options.AccountKeeper, options.SignModeHandler),
 		ante.NewIncrementSequenceDecorator(options.AccountKeeper),
-		ibcante.NewAnteDecorator(options.IBCKeeper),
+		ibcante.NewRedundantRelayDecorator(options.IBCKeeper),
 	}
 	return sdk.ChainAnteDecorators(anteDecorators...), nil
 

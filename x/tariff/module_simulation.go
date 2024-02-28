@@ -1,8 +1,6 @@
 package tariff
 
 import (
-	"math/rand"
-
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
@@ -20,9 +18,9 @@ func (am AppModule) ProposalContents(_ module.SimulationState) []simtypes.Weight
 	return nil
 }
 
-func (am AppModule) RandomizedParams(_ *rand.Rand) []simtypes.ParamChange {
-	return nil
-}
+// func (am AppModule) RandomizedParams(_ *rand.Rand) []simtypes.ParamChange {
+// 	return nil
+// }
 
 func (am AppModule) RegisterStoreDecoder(_ sdk.StoreDecoderRegistry) {}
 

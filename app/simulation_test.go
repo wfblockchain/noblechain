@@ -4,23 +4,26 @@ import (
 	"os"
 	"testing"
 
-	"github.com/wfblockchain/noblechain/v5/app"
-	"github.com/wfblockchain/noblechain/v5/cmd"
-
 	"cosmossdk.io/simapp"
 	abci "github.com/cometbft/cometbft/abci/types"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/codec"
+	simtestutil "github.com/cosmos/cosmos-sdk/testutil/sims"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simulationtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 	"github.com/cosmos/cosmos-sdk/x/simulation"
+	simcli "github.com/cosmos/cosmos-sdk/x/simulation/client/cli"
 	"github.com/stretchr/testify/require"
+	"github.com/wfblockchain/noblechain/v5/app"
+	"github.com/wfblockchain/noblechain/v5/cmd"
 )
 
 func init() {
-	simapp.GetSimulatorFlags()
+	simcli.GetSimulatorFlags()
 }
+
+const AppChainID = "app"
 
 type SimApp interface {
 	cmd.App
@@ -41,13 +44,15 @@ type SimApp interface {
 // Running as go benchmark test:
 // `go test -benchmem -run=^$ -bench ^BenchmarkSimulation ./app -NumBlocks=200 -BlockSize 50 -Commit=true -Verbose=true -Enabled=true`
 func BenchmarkSimulation(b *testing.B) {
-	simapp.FlagNumBlocksValue = 250
-	simapp.FlagBlockSizeValue = 50
-	simapp.FlagCommitValue = true
-	simapp.FlagVerboseValue = true
-	simapp.FlagEnabledValue = true
+	simcli.FlagNumBlocksValue = 250
+	simcli.FlagBlockSizeValue = 50
+	simcli.FlagCommitValue = true
+	simcli.FlagVerboseValue = true
+	simcli.FlagEnabledValue = true
+	config := simcli.NewConfigFromFlags()
+	config.ChainID = AppChainID
 
-	config, db, dir, logger, _, err := simapp.SetupSimulation("goleveldb-app-sim", "Simulation")
+	db, dir, logger, _, err := simtestutil.SetupSimulation(config, "leveldb-app-sim", "Simulation", simcli.FlagVerboseValue, simcli.FlagEnabledValue)
 	require.NoError(b, err, "simulation setup failed")
 
 	b.Cleanup(func() {
@@ -67,31 +72,31 @@ func BenchmarkSimulation(b *testing.B) {
 		app.DefaultNodeHome,
 		0,
 		encoding,
-		simapp.EmptyAppOptions{},
+		simtestutil.EmptyAppOptions{},
 	)
 
-	simApp, ok := app.(SimApp)
-	require.True(b, ok, "can't use simapp")
+	// simApp, ok := app
+	// require.True(b, ok, "can't use simapp")
 
 	// Run randomized simulations
 	_, simParams, simErr := simulation.SimulateFromSeed(
 		b,
 		os.Stdout,
-		simApp.GetBaseApp(),
-		simapp.AppStateFn(simApp.AppCodec(), simApp.SimulationManager()),
+		app.GetBaseApp(),
+		simtestutil.AppStateFn(app.AppCodec(), app.SimulationManager(), simapp.SimApp{}.DefaultGenesis()),
 		simulationtypes.RandomAccounts,
-		simapp.SimulationOperations(simApp, simApp.AppCodec(), config),
-		simApp.ModuleAccountAddrs(),
+		simtestutil.SimulationOperations(&simapp.SimApp{}, app.AppCodec(), config),
+		app.ModuleAccountAddrs(),
 		config,
-		simApp.AppCodec(),
+		app.AppCodec(),
 	)
 
 	// export state and simParams before the simulation error is checked
-	err = simapp.CheckExportSimulation(simApp, config, simParams)
+	err = simtestutil.CheckExportSimulation(&simapp.SimApp{}, config, simParams)
 	require.NoError(b, err)
 	require.NoError(b, simErr)
 
 	if config.Commit {
-		simapp.PrintStats(db)
+		simtestutil.PrintStats(db)
 	}
 }
