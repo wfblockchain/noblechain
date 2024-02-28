@@ -4,24 +4,22 @@ import (
 	"testing"
 	"time"
 
-	"cosmossdk.io/simapp"
-	simappparams "cosmossdk.io/simapp/params"
+	dbm "github.com/cometbft/cometbft-db"
 	"github.com/cometbft/cometbft/libs/log"
 	tmproto "github.com/cometbft/cometbft/proto/tendermint/types"
 	"github.com/cosmos/cosmos-sdk/store"
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	moduletestutil "github.com/cosmos/cosmos-sdk/types/module/testutil"
 	paramskeeper "github.com/cosmos/cosmos-sdk/x/params/keeper"
 	paramstypes "github.com/cosmos/cosmos-sdk/x/params/types"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	dbm "github.com/tendermint/tm-db"
-
 	"github.com/wfblockchain/noblechain/v5/x/globalfee/types"
 )
 
 func TestValidateGenesis(t *testing.T) {
-	encCfg := simapp.MakeTestEncodingConfig()
+	encCfg := moduletestutil.MakeTestEncodingConfig()
 	specs := map[string]struct {
 		src    string
 		expErr bool
@@ -58,7 +56,7 @@ func TestValidateGenesis(t *testing.T) {
 	}
 	for name, spec := range specs {
 		t.Run(name, func(t *testing.T) {
-			gotErr := AppModuleBasic{}.ValidateGenesis(encCfg.Marshaler, nil, []byte(spec.src))
+			gotErr := AppModuleBasic{}.ValidateGenesis(encCfg.Codec, nil, []byte(spec.src))
 			if spec.expErr {
 				require.Error(t, gotErr)
 				return
@@ -91,26 +89,26 @@ func TestInitExportGenesis(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			ctx, encCfg, subspace := setupTestStore(t)
 			m := NewAppModule(subspace)
-			m.InitGenesis(ctx, encCfg.Marshaler, []byte(spec.src))
-			gotJSON := m.ExportGenesis(ctx, encCfg.Marshaler)
+			m.InitGenesis(ctx, encCfg.Codec, []byte(spec.src))
+			gotJSON := m.ExportGenesis(ctx, encCfg.Codec)
 			var got types.GenesisState
-			require.NoError(t, encCfg.Marshaler.UnmarshalJSON(gotJSON, &got))
+			require.NoError(t, encCfg.Codec.UnmarshalJSON(gotJSON, &got))
 			assert.Equal(t, spec.exp, got, string(gotJSON))
 		})
 	}
 }
 
-func setupTestStore(t *testing.T) (sdk.Context, simappparams.EncodingConfig, paramstypes.Subspace) {
+func setupTestStore(t *testing.T) (sdk.Context, moduletestutil.TestEncodingConfig, paramstypes.Subspace) {
 	db := dbm.NewMemDB()
 	ms := store.NewCommitMultiStore(db)
-	encCfg := simapp.MakeTestEncodingConfig()
+	encCfg := moduletestutil.MakeTestEncodingConfig()
 	keyParams := sdk.NewKVStoreKey(paramstypes.StoreKey)
 	tkeyParams := sdk.NewTransientStoreKey(paramstypes.TStoreKey)
 	ms.MountStoreWithDB(keyParams, storetypes.StoreTypeIAVL, db)
 	ms.MountStoreWithDB(tkeyParams, storetypes.StoreTypeTransient, db)
 	require.NoError(t, ms.LoadLatestVersion())
 
-	paramsKeeper := paramskeeper.NewKeeper(encCfg.Marshaler, encCfg.Amino, keyParams, tkeyParams)
+	paramsKeeper := paramskeeper.NewKeeper(encCfg.Codec, encCfg.Amino, keyParams, tkeyParams)
 
 	ctx := sdk.NewContext(ms, tmproto.Header{
 		Height: 1234567,

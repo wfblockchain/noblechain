@@ -102,17 +102,17 @@ func (a AppModule) ExportGenesis(ctx sdk.Context, marshaler codec.JSONCodec) jso
 func (a AppModule) RegisterInvariants(registry sdk.InvariantRegistry) {
 }
 
-func (a AppModule) Route() sdk.Route {
-	return sdk.Route{}
-}
+// func (a AppModule) Route() sdk.Route {
+// 	return sdk.Route{}
+// }
 
-func (a AppModule) QuerierRoute() string {
-	return types.QuerierRoute
-}
+// func (a AppModule) QuerierRoute() string {
+// 	return types.QuerierRoute
+// }
 
-func (a AppModule) LegacyQuerierHandler(amino *codec.LegacyAmino) sdk.Querier {
-	return nil
-}
+// func (a AppModule) LegacyQuerierHandler(amino *codec.LegacyAmino) sdk.Querier {
+// 	return nil
+// }
 
 func (a AppModule) RegisterServices(cfg module.Configurator) {
 	types.RegisterQueryServer(cfg.QueryServer(), NewGrpcQuerier(a.paramSpace))
