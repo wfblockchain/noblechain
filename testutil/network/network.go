@@ -6,17 +6,17 @@ import (
 	"time"
 
 	"cosmossdk.io/simapp"
+	tmdb "github.com/cometbft/cometbft-db"
 	tmrand "github.com/cometbft/cometbft/libs/rand"
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/crypto/hd"
 	"github.com/cosmos/cosmos-sdk/crypto/keyring"
 	servertypes "github.com/cosmos/cosmos-sdk/server/types"
-	pruningtypes "github.com/cosmos/cosmos-sdk/store/types"
+	pruningtypes "github.com/cosmos/cosmos-sdk/store/pruning/types"
 	"github.com/cosmos/cosmos-sdk/testutil/network"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/cosmos/cosmos-sdk/x/staking"
-	tmdb "github.com/tendermint/tm-db"
 
 	genutil "github.com/cosmos/cosmos-sdk/x/genutil"
 	genutiltypes "github.com/cosmos/cosmos-sdk/x/genutil/types"
@@ -48,13 +48,18 @@ func New(t *testing.T, configs ...network.Config) *network.Network {
 	} else {
 		cfg = configs[0]
 	}
-	net := network.New(t, cfg)
+	//
+	net, err := network.New(t, "", cfg)
+	if err != nil {
+		// handle the error
+		fmt.Println("Error:", err)
+		// return or exit the function depending on your use case
+	}
+
 	t.Cleanup(net.Cleanup)
 	return net
 }
 
-// DefaultConfig will initialize config for the network with custom application,
-// genesis and single validator. All other parameters are inherited from cosmos-sdk/testutil/network.DefaultConfig
 func DefaultConfig() network.Config {
 	// app doesn't have this modules anymore, but we need them for test setup, which uses gentx and MsgCreateValidator
 	app.ModuleBasics[genutiltypes.ModuleName] = genutil.AppModuleBasic{}
