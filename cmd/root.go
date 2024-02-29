@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
+	tmcfg "github.com/cometbft/cometbft/config"
 	tmcli "github.com/cometbft/cometbft/libs/cli"
 	"github.com/cometbft/cometbft/libs/log"
 	"github.com/cosmos/cosmos-sdk/baseapp"
@@ -161,8 +162,8 @@ func NewRootCmd(
 			}
 
 			customAppTemplate, customAppConfig := initAppConfig()
-
-			if err := server.InterceptConfigsPreRunHandler(cmd, customAppTemplate, customAppConfig); err != nil {
+			defaultCfg := tmcfg.DefaultConfig()
+			if err := server.InterceptConfigsPreRunHandler(cmd, customAppTemplate, customAppConfig, defaultCfg); err != nil {
 				return err
 			}
 
@@ -196,6 +197,7 @@ func initRootCmd(
 	buildApp AppBuilder,
 	options rootOptions,
 ) {
+
 	rootCmd.AddCommand(
 		genutilcli.InitCmd(moduleBasics, defaultNodeHome),
 		genutilcli.CollectGenTxsCmd(banktypes.GenesisBalancesIterator{}, defaultNodeHome),
