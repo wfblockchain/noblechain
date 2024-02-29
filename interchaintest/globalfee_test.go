@@ -6,9 +6,9 @@ import (
 	"testing"
 
 	"github.com/cosmos/cosmos-sdk/x/params/types/proposal"
-	"github.com/strangelove-ventures/interchaintest/v4"
-	"github.com/strangelove-ventures/interchaintest/v4/chain/cosmos"
-	"github.com/strangelove-ventures/interchaintest/v4/testreporter"
+	"github.com/strangelove-ventures/interchaintest/v7"
+	"github.com/strangelove-ventures/interchaintest/v7/chain/cosmos"
+	"github.com/strangelove-ventures/interchaintest/v7/testreporter"
 	"github.com/stretchr/testify/require"
 	proposaltypes "github.com/wfblockchain/noble-paramauthority/x/params/types/proposal"
 	"github.com/wfblockchain/noblechain/v5/cmd"

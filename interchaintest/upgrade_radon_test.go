@@ -6,8 +6,8 @@ import (
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
-	"github.com/strangelove-ventures/interchaintest/v4/chain/cosmos"
-	"github.com/strangelove-ventures/interchaintest/v4/ibc"
+	"github.com/strangelove-ventures/interchaintest/v7/chain/cosmos"
+	"github.com/strangelove-ventures/interchaintest/v7/ibc"
 	"github.com/stretchr/testify/require"
 	fiattokenfactorytypes "github.com/wfblockchain/noble-fiattokenfactory/x/fiattokenfactory/types"
 	globalfeetypes "github.com/wfblockchain/noblechain/v5/x/globalfee/types"

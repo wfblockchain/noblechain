@@ -19,10 +19,10 @@ import (
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/strangelove-ventures/interchaintest/v4"
-	"github.com/strangelove-ventures/interchaintest/v4/chain/cosmos"
-	"github.com/strangelove-ventures/interchaintest/v4/ibc"
-	"github.com/strangelove-ventures/interchaintest/v4/testutil"
+	"github.com/strangelove-ventures/interchaintest/v7"
+	"github.com/strangelove-ventures/interchaintest/v7/chain/cosmos"
+	"github.com/strangelove-ventures/interchaintest/v7/ibc"
+	"github.com/strangelove-ventures/interchaintest/v7/testutil"
 	"github.com/stretchr/testify/require"
 	cctptypes "github.com/wfblockchain/noble-cctp/x/cctp/types"
 )
@@ -132,7 +132,7 @@ func testPostArgonUpgrade(
 
 	broadcaster := cosmos.NewBroadcaster(t, noble)
 	broadcaster.ConfigureClientContextOptions(func(clientContext sdkclient.Context) sdkclient.Context {
-		return clientContext.WithBroadcastMode(flags.BroadcastBlock)
+		return clientContext.WithBroadcastMode(flags.BroadcastSync)
 	})
 
 	t.Log("preparing to submit add public keys tx")

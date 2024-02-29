@@ -5,9 +5,9 @@ import (
 	"testing"
 
 	"github.com/gogo/protobuf/jsonpb"
-	"github.com/strangelove-ventures/interchaintest/v4"
-	"github.com/strangelove-ventures/interchaintest/v4/chain/cosmos"
-	"github.com/strangelove-ventures/interchaintest/v4/testreporter"
+	"github.com/strangelove-ventures/interchaintest/v7"
+	"github.com/strangelove-ventures/interchaintest/v7/chain/cosmos"
+	"github.com/strangelove-ventures/interchaintest/v7/testreporter"
 	"github.com/stretchr/testify/require"
 	"github.com/wfblockchain/noble-cctp/x/cctp/types"
 	"github.com/wfblockchain/noblechain/v5/cmd"
