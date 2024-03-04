@@ -19,7 +19,7 @@ func main() {
 		app.New,
 	)
 
-	if err := svrcmd.Execute(rootCmd, app.DefaultNodeHome); err != nil {
+	if err := svrcmd.Execute(rootCmd, "", app.DefaultNodeHome); err != nil {
 		os.Exit(1)
 	}
 }

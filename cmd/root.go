@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
+	dbm "github.com/cometbft/cometbft-db"
 	tmcfg "github.com/cometbft/cometbft/config"
 	tmcli "github.com/cometbft/cometbft/libs/cli"
 	"github.com/cometbft/cometbft/libs/log"
@@ -20,6 +21,7 @@ import (
 	serverconfig "github.com/cosmos/cosmos-sdk/server/config"
 	servertypes "github.com/cosmos/cosmos-sdk/server/types"
 	"github.com/cosmos/cosmos-sdk/snapshots"
+	snapshottypes "github.com/cosmos/cosmos-sdk/snapshots/types"
 	"github.com/cosmos/cosmos-sdk/store"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
@@ -31,7 +33,7 @@ import (
 	"github.com/spf13/cast"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
-	dbm "github.com/tendermint/tm-db"
+	// appparams "github.com/wfblockchain/noblechain/v5/app/params"
 )
 
 type (
@@ -137,7 +139,7 @@ func NewRootCmd(
 		WithLegacyAmino(encodingConfig.Amino).
 		WithInput(os.Stdin).
 		WithAccountRetriever(types.AccountRetriever{}).
-		WithBroadcastMode(flags.BroadcastBlock).
+		WithBroadcastMode(flags.BroadcastSync).
 		WithHomeDir(defaultNodeHome).
 		WithViper(rootOptions.envPrefix)
 
@@ -197,7 +199,7 @@ func initRootCmd(
 	buildApp AppBuilder,
 	options rootOptions,
 ) {
-
+	// gentxModule := app.ModuleBasics[genutiltypes.ModuleName].(genutil.AppModuleBasic)
 	rootCmd.AddCommand(
 		genutilcli.InitCmd(moduleBasics, defaultNodeHome),
 		genutilcli.CollectGenTxsCmd(banktypes.GenesisBalancesIterator{}, defaultNodeHome),
@@ -213,7 +215,7 @@ func initRootCmd(
 		tmcli.NewCompletionCmd(rootCmd, true),
 		debug.Cmd(),
 		config.Cmd(),
-		server.RosettaCommand(encodingConfig.InterfaceRegistry, encodingConfig.Marshaler),
+		// server.RosettaCommand(encodingConfig.InterfaceRegistry, encodingConfig.Marshaler),
 	)
 
 	a := appCreator{
@@ -355,6 +357,11 @@ func (a appCreator) newApp(
 		panic(err)
 	}
 
+	snapshotOptions := snapshottypes.NewSnapshotOptions(
+		cast.ToUint64(appOpts.Get(server.FlagStateSyncSnapshotInterval)),
+		cast.ToUint32(appOpts.Get(server.FlagStateSyncSnapshotKeepRecent)),
+	)
+
 	return a.buildApp(
 		logger,
 		db,
@@ -373,9 +380,9 @@ func (a appCreator) newApp(
 		baseapp.SetInterBlockCache(cache),
 		baseapp.SetTrace(cast.ToBool(appOpts.Get(server.FlagTrace))),
 		baseapp.SetIndexEvents(cast.ToStringSlice(appOpts.Get(server.FlagIndexEvents))),
-		baseapp.SetSnapshotStore(snapshotStore),
-		baseapp.SetSnapshotInterval(cast.ToUint64(appOpts.Get(server.FlagStateSyncSnapshotInterval))),
-		baseapp.SetSnapshotKeepRecent(cast.ToUint32(appOpts.Get(server.FlagStateSyncSnapshotKeepRecent))),
+		baseapp.SetSnapshot(snapshotStore, snapshotOptions),
+		// baseapp.SetSnapshotInterval(cast.ToUint64(appOpts.Get(server.FlagStateSyncSnapshotInterval))),
+		// baseapp.SetSnapshotKeepRecent(cast.ToUint32(appOpts.Get(server.FlagStateSyncSnapshotKeepRecent))),
 	)
 }
 
@@ -388,6 +395,7 @@ func (a appCreator) appExport(
 	forZeroHeight bool,
 	jailAllowedAddrs []string,
 	appOpts servertypes.AppOptions,
+	modulesToExport []string,
 ) (servertypes.ExportedApp, error) {
 	var exportableApp ExportableApp
 
