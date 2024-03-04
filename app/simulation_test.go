@@ -75,20 +75,20 @@ func BenchmarkSimulation(b *testing.B) {
 		simtestutil.EmptyAppOptions{},
 	)
 
-	// simApp, ok := app
-	// require.True(b, ok, "can't use simapp")
+	simApp, ok := app.(SimApp)
+	require.True(b, ok, "can't use simapp")
 
 	// Run randomized simulations
 	_, simParams, simErr := simulation.SimulateFromSeed(
 		b,
 		os.Stdout,
-		app.GetBaseApp(),
-		simtestutil.AppStateFn(app.AppCodec(), app.SimulationManager(), simapp.SimApp{}.DefaultGenesis()),
+		simApp.GetBaseApp(),
+		simtestutil.AppStateFn(simApp.AppCodec(), simApp.SimulationManager(), simapp.SimApp{}.DefaultGenesis()),
 		simulationtypes.RandomAccounts,
-		simtestutil.SimulationOperations(&simapp.SimApp{}, app.AppCodec(), config),
-		app.ModuleAccountAddrs(),
+		simtestutil.SimulationOperations(&simapp.SimApp{}, simApp.AppCodec(), config),
+		simApp.ModuleAccountAddrs(),
 		config,
-		app.AppCodec(),
+		simApp.AppCodec(),
 	)
 
 	// export state and simParams before the simulation error is checked
