@@ -4,11 +4,12 @@ import (
 	"context"
 	"testing"
 
-	"github.com/strangelove-ventures/interchaintest/v4"
-	"github.com/strangelove-ventures/interchaintest/v4/chain/cosmos"
-	"github.com/strangelove-ventures/interchaintest/v4/ibc"
-	"github.com/strangelove-ventures/interchaintest/v4/testreporter"
-	"github.com/strangelove-ventures/interchaintest/v4/testutil"
+	cosmossdk_io_math "cosmossdk.io/math"
+	"github.com/strangelove-ventures/interchaintest/v7"
+	"github.com/strangelove-ventures/interchaintest/v7/chain/cosmos"
+	"github.com/strangelove-ventures/interchaintest/v7/ibc"
+	"github.com/strangelove-ventures/interchaintest/v7/testreporter"
+	"github.com/strangelove-ventures/interchaintest/v7/testutil"
 	"github.com/stretchr/testify/require"
 	"go.uber.org/zap/zaptest"
 )
@@ -132,7 +133,7 @@ func TestClientSubstitution(t *testing.T) {
 
 	_, err = noble.SendIBCTransfer(ctx, nobleChannel.ChannelID, users[0].KeyName(), ibc.WalletAmount{
 		Address: users[1].FormattedAddress(),
-		Amount:  1000000,
+		Amount:  cosmossdk_io_math.NewInt(1000000),
 		Denom:   noble.Config().Denom,
 	}, ibc.TransferOptions{})
 
@@ -171,7 +172,7 @@ func TestClientSubstitution(t *testing.T) {
 	// send a packet on the same channel with new client, should succeed.
 	tx, err := noble.SendIBCTransfer(ctx, nobleChannel.ChannelID, users[0].KeyName(), ibc.WalletAmount{
 		Address: users[1].FormattedAddress(),
-		Amount:  1000000,
+		Amount:  cosmossdk_io_math.NewInt(1000000),
 		Denom:   noble.Config().Denom,
 	}, ibc.TransferOptions{})
 	require.NoError(t, err)

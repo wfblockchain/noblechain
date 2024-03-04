@@ -6,13 +6,14 @@ import (
 	"testing"
 	"time"
 
+	cosmossdk_io_math "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	transfertypes "github.com/cosmos/ibc-go/v7/modules/apps/transfer/types"
-	"github.com/strangelove-ventures/interchaintest/v4"
-	"github.com/strangelove-ventures/interchaintest/v4/chain/cosmos"
-	"github.com/strangelove-ventures/interchaintest/v4/ibc"
-	"github.com/strangelove-ventures/interchaintest/v4/testreporter"
-	"github.com/strangelove-ventures/interchaintest/v4/testutil"
+	"github.com/strangelove-ventures/interchaintest/v7"
+	"github.com/strangelove-ventures/interchaintest/v7/chain/cosmos"
+	"github.com/strangelove-ventures/interchaintest/v7/ibc"
+	"github.com/strangelove-ventures/interchaintest/v7/testreporter"
+	"github.com/strangelove-ventures/interchaintest/v7/testutil"
 	"github.com/stretchr/testify/require"
 	"go.uber.org/zap/zaptest"
 )
@@ -167,7 +168,7 @@ func TestPacketForwardMiddleware(t *testing.T) {
 		transfer := ibc.WalletAmount{
 			Address: userB.FormattedAddress(),
 			Denom:   chainA.Config().Denom,
-			Amount:  transferAmount,
+			Amount:  cosmossdk_io_math.NewInt(transferAmount),
 		}
 
 		secondHopMetadata := &PacketMetadata{
@@ -239,7 +240,7 @@ func TestPacketForwardMiddleware(t *testing.T) {
 		transfer := ibc.WalletAmount{
 			Address: userC.FormattedAddress(),
 			Denom:   thirdHopIBCDenom,
-			Amount:  transferAmount,
+			Amount:  cosmossdk_io_math.NewInt(transferAmount),
 		}
 
 		secondHopMetadata := &PacketMetadata{
@@ -316,7 +317,7 @@ func TestPacketForwardMiddleware(t *testing.T) {
 		transfer := ibc.WalletAmount{
 			Address: userB.FormattedAddress(),
 			Denom:   chainA.Config().Denom,
-			Amount:  transferAmount,
+			Amount:  cosmossdk_io_math.NewInt(transferAmount),
 		}
 
 		metadata := &PacketMetadata{
@@ -370,7 +371,7 @@ func TestPacketForwardMiddleware(t *testing.T) {
 		transfer := ibc.WalletAmount{
 			Address: userB.FormattedAddress(),
 			Denom:   chainA.Config().Denom,
-			Amount:  transferAmount,
+			Amount:  cosmossdk_io_math.NewInt(transferAmount),
 		}
 
 		retries := uint8(2)
@@ -428,7 +429,7 @@ func TestPacketForwardMiddleware(t *testing.T) {
 		transfer := ibc.WalletAmount{
 			Address: userB.FormattedAddress(),
 			Denom:   chainA.Config().Denom,
-			Amount:  transferAmount,
+			Amount:  cosmossdk_io_math.NewInt(transferAmount),
 		}
 
 		secondHopMetadata := &PacketMetadata{
@@ -519,7 +520,7 @@ func TestPacketForwardMiddleware(t *testing.T) {
 		transfer := ibc.WalletAmount{
 			Address: userA.FormattedAddress(),
 			Denom:   chainB.Config().Denom,
-			Amount:  transferAmount,
+			Amount:  cosmossdk_io_math.NewInt(transferAmount),
 		}
 
 		chainBHeight, err := chainB.Height(ctx)
@@ -552,7 +553,7 @@ func TestPacketForwardMiddleware(t *testing.T) {
 		transfer = ibc.WalletAmount{
 			Address: userB.FormattedAddress(),
 			Denom:   baIBCDenom,
-			Amount:  transferAmount,
+			Amount:  cosmossdk_io_math.NewInt(transferAmount),
 		}
 
 		secondHopMetadata := &PacketMetadata{

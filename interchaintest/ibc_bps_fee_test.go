@@ -4,12 +4,13 @@ import (
 	"context"
 	"testing"
 
+	cosmossdk_io_math "cosmossdk.io/math"
 	transfertypes "github.com/cosmos/ibc-go/v7/modules/apps/transfer/types"
-	"github.com/strangelove-ventures/interchaintest/v4"
-	"github.com/strangelove-ventures/interchaintest/v4/chain/cosmos"
-	"github.com/strangelove-ventures/interchaintest/v4/ibc"
-	"github.com/strangelove-ventures/interchaintest/v4/testreporter"
-	"github.com/strangelove-ventures/interchaintest/v4/testutil"
+	"github.com/strangelove-ventures/interchaintest/v7"
+	"github.com/strangelove-ventures/interchaintest/v7/chain/cosmos"
+	"github.com/strangelove-ventures/interchaintest/v7/ibc"
+	"github.com/strangelove-ventures/interchaintest/v7/testreporter"
+	"github.com/strangelove-ventures/interchaintest/v7/testutil"
 	"github.com/stretchr/testify/require"
 	"go.uber.org/zap/zaptest"
 )
@@ -120,7 +121,7 @@ func TestICS20BPSFees(t *testing.T) {
 	tx, err := noble.SendIBCTransfer(ctx, nobleChan.ChannelID, gw.extraWallets.User.KeyName(), ibc.WalletAmount{
 		Address: gaiaReceiver,
 		Denom:   denomMetadataUsdc.Base,
-		Amount:  100000000,
+		Amount:  cosmossdk_io_math.NewInt(100000000),
 	}, ibc.TransferOptions{})
 	require.NoError(t, err, "failed to send ibc transfer from noble")
 
@@ -149,7 +150,7 @@ func TestICS20BPSFees(t *testing.T) {
 	tx, err = noble.SendIBCTransfer(ctx, nobleChan.ChannelID, gw.extraWallets.User.FormattedAddress(), ibc.WalletAmount{
 		Address: gaiaReceiver,
 		Denom:   denomMetadataUsdc.Base,
-		Amount:  100000000000,
+		Amount:  cosmossdk_io_math.NewInt(100000000000),
 	}, ibc.TransferOptions{})
 	require.NoError(t, err, "failed to send ibc transfer from noble")
 
