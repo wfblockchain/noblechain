@@ -1,5 +1,5 @@
 syntax = "proto3";
-package noble.tokenfactory;
+package tokenfactory;
 
 // this line is used by starport scaffolding # proto/tx/import
 import "cosmos/base/v1beta1/coin.proto";
@@ -9,6 +9,7 @@ option go_package = "github.com/wfblockchain/noblechain/v5/x/tokenfactory/types"
 
 // Msg defines the Msg service.
 service Msg {
+  
   rpc UpdateMasterMinter(MsgUpdateMasterMinter) returns (MsgUpdateMasterMinterResponse);
   rpc UpdatePauser(MsgUpdatePauser) returns (MsgUpdatePauserResponse);
   rpc UpdateBlacklister(MsgUpdateBlacklister) returns (MsgUpdateBlacklisterResponse);

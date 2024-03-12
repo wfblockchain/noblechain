@@ -434,10 +434,11 @@ func New(
 		app.IBCKeeper.ChannelKeeper,
 	)
 
+	// authority := authtypes.NewModuleAddress(govtypes.ModuleName).String()
 	// app.PacketForwardKeeper = packetforwardkeeper.NewKeeper(
 	// 	appCodec,
 	// 	keys[packetforwardtypes.StoreKey],
-	// 	app.GetSubspace(packetforwardtypes.ModuleName),
+	// 	nil,
 	// 	app.TransferKeeper, // will be zero-value here. reference set later on with SetTransferKeeper.
 	// 	app.IBCKeeper.ChannelKeeper,
 	// 	app.DistrKeeper,
@@ -445,12 +446,19 @@ func New(
 	// 	app.TariffKeeper,
 	// )
 
+	app.IBCFeeKeeper = ibcfeekeeper.NewKeeper(
+		appCodec, keys[ibcfeetypes.StoreKey],
+		app.IBCKeeper.ChannelKeeper, // may be replaced with IBC middleware
+		app.IBCKeeper.ChannelKeeper,
+		&app.IBCKeeper.PortKeeper, app.AccountKeeper, app.BankKeeper,
+	)
+
 	// Create Transfer Keepers
 	app.TransferKeeper = ibctransferkeeper.NewKeeper(
 		appCodec,
 		keys[ibctransfertypes.StoreKey],
 		app.GetSubspace(ibctransfertypes.ModuleName),
-		app.PacketForwardKeeper,
+		app.IBCFeeKeeper,
 		app.IBCKeeper.ChannelKeeper,
 		&app.IBCKeeper.PortKeeper,
 		app.AccountKeeper,
@@ -458,7 +466,7 @@ func New(
 		scopedTransferKeeper,
 	)
 
-	app.PacketForwardKeeper.SetTransferKeeper(app.TransferKeeper)
+	// app.PacketForwardKeeper.SetTransferKeeper(app.TransferKeeper)
 
 	transferModule := transfer.NewAppModule(app.TransferKeeper)
 
@@ -471,13 +479,6 @@ func New(
 	// 	scopedICAHostKeeper,
 	// 	app.MsgServiceRouter(),
 	// )
-
-	app.IBCFeeKeeper = ibcfeekeeper.NewKeeper(
-		appCodec, keys[ibcfeetypes.StoreKey],
-		app.IBCKeeper.ChannelKeeper, // may be replaced with IBC middleware
-		app.IBCKeeper.ChannelKeeper,
-		&app.IBCKeeper.PortKeeper, app.AccountKeeper, app.BankKeeper,
-	)
 
 	app.ICAHostKeeper = icahostkeeper.NewKeeper(
 		appCodec, keys[icahosttypes.StoreKey], app.GetSubspace(icahosttypes.SubModuleName),
@@ -686,10 +687,10 @@ func New(
 	// )
 
 	// create the simulation manager and define the order of the modules for deterministic simulations
-	// overrideModules := map[string]module.AppModuleSimulation{
-	// 	authtypes.ModuleName: auth.NewAppModule(app.appCodec, app.AccountKeeper, authsims.RandomGenesisAccounts),
-	// }
-	// app.sm = module.NewSimulationManagerFromAppModules(app.mm.Modules, overrideModules)
+	overrideModules := map[string]module.AppModuleSimulation{
+		authtypes.ModuleName: auth.NewAppModule(app.appCodec, app.AccountKeeper, authsims.RandomGenesisAccounts, app.GetSubspace(authtypes.ModuleName)),
+	}
+	app.sm = module.NewSimulationManagerFromAppModules(app.mm.Modules, overrideModules)
 	app.sm.RegisterStoreDecoders()
 
 	// initialize stores

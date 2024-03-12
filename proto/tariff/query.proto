@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package noble.tariff;
+package tariff;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";

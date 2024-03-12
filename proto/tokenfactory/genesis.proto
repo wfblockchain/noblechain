@@ -1,5 +1,5 @@
 syntax = "proto3";
-package noble.tokenfactory;
+package tokenfactory;
 
 import "gogoproto/gogo.proto";
 import "tokenfactory/blacklisted.proto";

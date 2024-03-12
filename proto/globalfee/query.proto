@@ -1,5 +1,5 @@
 syntax = "proto3";
-package noble.globalfee;
+package globalfee;
 
 import "globalfee/genesis.proto";
 import "gogoproto/gogo.proto";

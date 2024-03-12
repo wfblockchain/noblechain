@@ -1,5 +1,5 @@
 syntax = "proto3";
-package noble.tariff;
+package tariff;
 
 import "gogoproto/gogo.proto";
 import "tariff/params.proto";

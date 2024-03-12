@@ -15,9 +15,10 @@ RUN git clone https://github.com/regen-network/protobuf.git; \
   make install; \
   cd ..
 
-RUN git clone https://github.com/regen-network/cosmos-proto.git; \
-  cd cosmos-proto/protoc-gen-gocosmos; \
+RUN git clone https://github.com/cosmos/gogoproto.git; \
+  cd gogoproto/protoc-gen-gocosmos; \
   go install .; \
   cd ..
+
 
 COPY --from=BUILDER /usr/local/bin /usr/local/bin

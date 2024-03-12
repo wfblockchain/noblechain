@@ -35,7 +35,6 @@ import (
 	"github.com/spf13/cast"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
-	// appparams "github.com/wfblockchain/noblechain/v5/app/params"
 )
 
 type (
@@ -385,6 +384,7 @@ func (a appCreator) newApp(
 		baseapp.SetSnapshot(snapshotStore, snapshotOptions),
 		// baseapp.SetSnapshotInterval(cast.ToUint64(appOpts.Get(server.FlagStateSyncSnapshotInterval))),
 		// baseapp.SetSnapshotKeepRecent(cast.ToUint32(appOpts.Get(server.FlagStateSyncSnapshotKeepRecent))),
+		baseapp.SetChainID("noble-1"),
 	)
 }
 

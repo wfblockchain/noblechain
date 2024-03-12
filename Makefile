@@ -129,19 +129,19 @@ proto-all: proto-format proto-lint proto-gen
 
 proto-format:
 	@echo "🤖 Running protobuf formatter..."
-	@docker run --rm --volume "$(PWD)":/workspace --workdir /workspace \
+	@docker run --rm --volume "$(shell pwd)":/workspace --workdir /workspace \
 		bufbuild/buf:$(BUF_VERSION) format --diff --write
 	@echo "✅ Completed protobuf formatting!"
 
 proto-gen:
 	@echo "🤖 Generating code from protobuf..."
-	@docker run --rm --volume "$(PWD)":/workspace --workdir /workspace \
+	@docker run --rm --volume "$(shell pwd)":/workspace --workdir /workspace \
 		noble-proto sh ./proto/generate.sh
 	@echo "✅ Completed code generation!"
 
 proto-lint:
 	@echo "🤖 Running protobuf linter..."
-	@docker run --rm --volume "$(PWD)":/workspace --workdir /workspace \
+	@docker run --rm --volume "$(shell pwd)":/workspace --workdir /workspace \
 		bufbuild/buf:$(BUF_VERSION) lint
 	@echo "✅ Completed protobuf linting!"
 

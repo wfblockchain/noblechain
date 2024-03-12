@@ -1,5 +1,5 @@
 syntax = "proto3";
-package noble.tokenfactory;
+package tokenfactory;
 
 option go_package = "github.com/wfblockchain/noblechain/v5/x/tokenfactory/types";
 
