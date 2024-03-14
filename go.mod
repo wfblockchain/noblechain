@@ -9,9 +9,9 @@ require (
 	github.com/cometbft/cometbft v0.37.2
 	github.com/cometbft/cometbft-db v0.8.0
 	github.com/cosmos/cosmos-sdk v0.47.5
+	github.com/cosmos/gogoproto v1.4.10
 	github.com/cosmos/ibc-apps/middleware/packet-forward-middleware/v7 v7.0.1
 	github.com/cosmos/ibc-go/v7 v7.3.1
-	github.com/gogo/protobuf v1.3.3
 	github.com/golang/protobuf v1.5.3
 	github.com/gorilla/mux v1.8.0
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0
@@ -19,9 +19,9 @@ require (
 	github.com/spf13/cobra v1.7.0
 	github.com/spf13/pflag v1.0.5
 	github.com/stretchr/testify v1.8.4
-	github.com/wfblockchain/noble-cctp v0.0.0-20240221072627-0de3af0bc336
-	github.com/wfblockchain/noble-fiattokenfactory v0.0.0-20240218134203-7961fc6ca5b0
-	github.com/wfblockchain/noble-paramauthority v1.1.1-0.20240227123132-0f9a4040a352
+	github.com/wfblockchain/noble-cctp v0.0.0-20240312083401-275dedf325a3
+	github.com/wfblockchain/noble-fiattokenfactory v0.0.0-20240312083442-25f7f261cea6
+	github.com/wfblockchain/noble-paramauthority v1.1.1-0.20240312112758-a49f2089c643
 	google.golang.org/genproto/googleapis/api v0.0.0-20230726155614-23370e0ffb3e
 	google.golang.org/grpc v1.57.0
 	gopkg.in/yaml.v2 v2.4.0
@@ -62,7 +62,6 @@ require (
 	github.com/cosmos/cosmos-proto v1.0.0-beta.2 // indirect
 	github.com/cosmos/go-bip39 v1.0.0 // indirect
 	github.com/cosmos/gogogateway v1.2.0 // indirect
-	github.com/cosmos/gogoproto v1.4.10 // indirect
 	github.com/cosmos/iavl v0.20.0 // indirect
 	github.com/cosmos/ics23/go v0.10.0 // indirect
 	github.com/cosmos/ledger-cosmos-go v0.12.2 // indirect
@@ -86,6 +85,7 @@ require (
 	github.com/go-logfmt/logfmt v0.6.0 // indirect
 	github.com/godbus/dbus v0.0.0-20190726142602-4481cbc300e2 // indirect
 	github.com/gogo/googleapis v1.4.1 // indirect
+	github.com/gogo/protobuf v1.3.3 // indirect
 	github.com/golang/glog v1.1.0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
 	github.com/golang/mock v1.6.0 // indirect
@@ -185,7 +185,7 @@ replace (
 	// use cosmos compatible ChainSafe/go-schnorrkel
 	github.com/ChainSafe/go-schnorrkel => github.com/ChainSafe/go-schnorrkel v0.0.0-20200405005733-88cbf1b4c40d
 
-	github.com/cosmos/gogoproto => /home/leo10/gogoproto
+	// github.com/cosmos/gogoproto => /home/leo10/gogoproto
 
 	// use macos sonoma compatible cosmos/ledger-cosmos-go
 	github.com/cosmos/ledger-cosmos-go => github.com/cosmos/ledger-cosmos-go v0.12.4
@@ -197,9 +197,9 @@ replace (
 	// use cosmos compatible syndtr/goleveldb
 	github.com/syndtr/goleveldb => github.com/syndtr/goleveldb v1.0.1-0.20210819022825-2ae1ddf74ef7
 
-	github.com/wfblockchain/noble-paramauthority => /home/leo10/noble-paramauthority
-	github.com/wfblockchain/noble-fiattokenfactory => /home/leo10/noble-fiattokenfactory
-	github.com/wfblockchain/noble-cctp => /home/leo10/noble-cctp
+	// github.com/wfblockchain/noble-paramauthority => /home/leo10/noble-paramauthority
+	// github.com/wfblockchain/noble-fiattokenfactory => /home/leo10/noble-fiattokenfactory
+	// github.com/wfblockchain/noble-cctp => /home/leo10/noble-cctp
 	golang.org/x/exp => golang.org/x/exp v0.0.0-20230711153332-06a737ee72cb
 
 	// use cometbft
