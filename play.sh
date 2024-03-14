@@ -52,8 +52,8 @@ if ! mkdir -p $CHAINDIR/$CHAINID 2>/dev/null; then
 fi
 
 # Build genesis file incl account for passed address
-coins="100000000000$DENOM,100000000000$BASEDENOM"
-delegate="100000000000$DENOM"
+coins="100000000000000000$DENOM,100000000000000$BASEDENOM"
+delegate="100000000000000$DENOM"
 
 redirect nobled --home $CHAINDIR/$CHAINID --chain-id $CHAINID init $CHAINID 
 sleep 1

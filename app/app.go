@@ -436,17 +436,18 @@ func New(
 		app.IBCKeeper.ChannelKeeper,
 	)
 
-	// authority := authtypes.NewModuleAddress(govtypes.ModuleName).String()
-	// app.PacketForwardKeeper = packetforwardkeeper.NewKeeper(
-	// 	appCodec,
-	// 	keys[packetforwardtypes.StoreKey],
-	// 	nil,
-	// 	app.TransferKeeper, // will be zero-value here. reference set later on with SetTransferKeeper.
-	// 	app.IBCKeeper.ChannelKeeper,
-	// 	app.DistrKeeper,
-	// 	app.BankKeeper,
-	// 	app.TariffKeeper,
-	// )
+	authority := authtypes.NewModuleAddress(govtypes.ModuleName).String()
+	app.PacketForwardKeeper = packetforwardkeeper.NewKeeper(
+		appCodec,
+		keys[packetforwardtypes.StoreKey],
+		nil,
+		// app.TransferKeeper, // will be zero-value here. reference set later on with SetTransferKeeper.
+		app.IBCKeeper.ChannelKeeper,
+		app.DistrKeeper,
+		app.BankKeeper,
+		app.IBCKeeper.ChannelKeeper,
+		authority,
+	)
 
 	app.IBCFeeKeeper = ibcfeekeeper.NewKeeper(
 		appCodec, keys[ibcfeetypes.StoreKey],
@@ -460,7 +461,7 @@ func New(
 		appCodec,
 		keys[ibctransfertypes.StoreKey],
 		app.GetSubspace(ibctransfertypes.ModuleName),
-		app.IBCFeeKeeper,
+		app.PacketForwardKeeper,
 		app.IBCKeeper.ChannelKeeper,
 		&app.IBCKeeper.PortKeeper,
 		app.AccountKeeper,
@@ -468,7 +469,7 @@ func New(
 		scopedTransferKeeper,
 	)
 
-	// app.PacketForwardKeeper.SetTransferKeeper(app.TransferKeeper)
+	app.PacketForwardKeeper.SetTransferKeeper(app.TransferKeeper)
 
 	transferModule := transfer.NewAppModule(app.TransferKeeper)
 
@@ -577,7 +578,7 @@ func New(
 		icaModule,
 		tokenfactoryModule,
 		fiattokenfactorymodule,
-		packetforward.NewAppModule(app.PacketForwardKeeper),
+		packetforward.NewAppModule(app.PacketForwardKeeper, app.GetSubspace(packetforwardtypes.ModuleName)),
 		globalfee.NewAppModule(app.GetSubspace(globalfee.ModuleName)),
 		tariff.NewAppModule(appCodec, app.TariffKeeper, app.AccountKeeper, app.BankKeeper),
 		cctp.NewAppModule(appCodec, app.AccountKeeper, app.BankKeeper, app.CCTPKeeper),
