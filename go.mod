@@ -185,8 +185,6 @@ replace (
 	// use cosmos compatible ChainSafe/go-schnorrkel
 	github.com/ChainSafe/go-schnorrkel => github.com/ChainSafe/go-schnorrkel v0.0.0-20200405005733-88cbf1b4c40d
 
-	// github.com/cosmos/gogoproto => /home/leo10/gogoproto
-
 	// use macos sonoma compatible cosmos/ledger-cosmos-go
 	github.com/cosmos/ledger-cosmos-go => github.com/cosmos/ledger-cosmos-go v0.12.4
 
@@ -197,9 +195,6 @@ replace (
 	// use cosmos compatible syndtr/goleveldb
 	github.com/syndtr/goleveldb => github.com/syndtr/goleveldb v1.0.1-0.20210819022825-2ae1ddf74ef7
 
-	// github.com/wfblockchain/noble-paramauthority => /home/leo10/noble-paramauthority
-	// github.com/wfblockchain/noble-fiattokenfactory => /home/leo10/noble-fiattokenfactory
-	// github.com/wfblockchain/noble-cctp => /home/leo10/noble-cctp
 	golang.org/x/exp => golang.org/x/exp v0.0.0-20230711153332-06a737ee72cb
 
 	// use cometbft
@@ -207,5 +202,4 @@ replace (
 
 	// use cosmos compatible google.golang.org/grpc
 	google.golang.org/grpc => google.golang.org/grpc v1.55.0
-
 )

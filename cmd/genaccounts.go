@@ -51,6 +51,8 @@ contain valid denominations. Accounts may optionally be supplied with vesting pa
 				return fmt.Errorf("failed to parse coins: %w", err)
 			}
 
+			var kb keyring.Keyring
+
 			addr, err := sdk.AccAddressFromBech32(args[0])
 			if err != nil {
 				inBuf := bufio.NewReader(cmd.InOrStdin())
@@ -59,11 +61,21 @@ contain valid denominations. Accounts may optionally be supplied with vesting pa
 					return err
 				}
 
-				// attempt to lookup address from Keybase if no address was provided
-				kb, err := keyring.New(sdk.KeyringServiceName(), keyringBackend, clientCtx.HomeDir, inBuf, depCdc)
-				if err != nil {
-					return fmt.Errorf("failed to lookup keyring: %w", err)
+				if keyringBackend != "" && clientCtx.Keyring == nil {
+					var err error
+					kb, err = keyring.New(sdk.KeyringServiceName(), keyringBackend, clientCtx.HomeDir, inBuf, clientCtx.Codec)
+					if err != nil {
+						return err
+					}
+				} else {
+					kb = clientCtx.Keyring
 				}
+
+				// attempt to lookup address from Keybase if no address was provided
+				// kb, err := keyring.New(sdk.KeyringServiceName(), keyringBackend, clientCtx.HomeDir, inBuf, depCdc)
+				// if err != nil {
+				// 	return fmt.Errorf("failed to lookup keyring: %w", err)
+				// }
 
 				info, err := kb.Key(args[0])
 				if err != nil {
